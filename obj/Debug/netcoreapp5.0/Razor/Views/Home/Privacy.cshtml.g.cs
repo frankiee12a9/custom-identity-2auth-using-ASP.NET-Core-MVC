@@ -26,8 +26,29 @@ using identity_2auth_mvc.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using identity_2auth_mvc.Models.Klas;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using identity_2auth_mvc.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8ddb6bffa5a9b264bf8f89038bf03c234083fd3", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b4ddd4c73cf9e949ac669da8d4e0195dfbd61e49", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8c8956e3a956151fbd957c45296973096f3b8a69", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

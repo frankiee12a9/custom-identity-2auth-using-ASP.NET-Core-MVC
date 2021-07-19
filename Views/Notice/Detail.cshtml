@@ -1,0 +1,36 @@
+﻿@model NoticeViewModel
+@{
+	ViewData["Title"] = "File Detail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Note Detail</h5>
+
+<div class="card p-5">
+	<h4>File Detail</h4>
+	<div class="card-header">
+		<h5>
+			@Model.Description
+		</h5><br />
+		<p>
+			File: <a class="nav-link" asp-controller="Note" asp-action="DownloadNoteFromDB"
+				asp-route-Id="@Model.Id">@Model.Name</a>
+		</p>
+		<p>
+			Created Time: @Model.CreatedOn
+		</p>
+	</div>
+	<div class="card-body">
+		<p>
+			@Model.Description
+		</p>
+	</div>
+	<div class="card-footer">
+		<a type="button" class="btn btn-primary" asp-controller="Note" asp-action="DownloadNoteFromDB"
+			asp-route-Id="@Model.Id">Download</a>
+		<a type="button" class="btn btn-info" asp-controller="Note" asp-action="EditNote"
+			asp-route-Id="@Model.Id">Edit</a>
+		<a type="button" class="btn btn-danger" asp-controller="Note" asp-action="DeleteNoteFromDB"
+			asp-route-Id="@Model.Id">Delete</a>
+	</div>
+</div>

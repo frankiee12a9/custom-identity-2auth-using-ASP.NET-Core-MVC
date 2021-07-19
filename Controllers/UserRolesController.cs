@@ -9,7 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace identity_2auth_mvc.Controllers
-{
+{ 
+	[Authorize(Roles = "SuperAdmin")]
 	public class UserRolesController: Controller
 	{
 		private readonly UserManager<AppUser> _userManager;
@@ -43,7 +44,7 @@ namespace identity_2auth_mvc.Controllers
 			return View(userViewModel);
 		}
 
-		// [Authorize(Roles = "Admin")]
+		[Authorize(Roles = "SuperAdmin")]
 		[HttpGet]
 		public async Task<IActionResult> Manage(string userId)
 		{

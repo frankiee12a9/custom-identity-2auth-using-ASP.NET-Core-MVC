@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Course> 
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="border backgroundWhite p-3">
+	<div class="row">
+		<div class="col-6">
+			<h3 class="text-primary">Courses List</h3>
+		</div>
+		<div class="col-6 text-primary text-right">
+			<a class="btn btn-primary" asp-controller="CourseManage" asp-action="Upsert">
+				<i class="fas fa-plus">&nbsp; Create new course</i>
+			</a>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr class="text-primary">
+					<td>Course ID</td>
+					<td>Course Name</td>
+					<td>Course Type</td>
+					<td>Course Credit</td>
+					<td>Lecturer</td>
+					<td></td>
+				</tr>
+			</thead>
+			@foreach (var course in Model)
+			{
+				<tbody>
+					<tr>
+						<td>@course.CourseID</td>
+						<td>@course.CourseName</td>
+						<td>@(course.CourseType)</td>
+						<td>@course.CourseCredit</td>
+						<td>NULL</td>
+						<td class="text-center">
+							<a class="btn btn-primary" asp-action="Detail" asp-route-id="@course.CourseID">Detail</a>
+						</td>
+					</tr>
+				</tbody>
+			} 
+		</table>
+	</div>
+</div>
+
+@*@section Script {
+	<script src="~/js/courseManage.js"></script>
+} *@
+

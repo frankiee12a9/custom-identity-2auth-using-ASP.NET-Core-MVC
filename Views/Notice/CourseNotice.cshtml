@@ -1,0 +1,57 @@
+﻿@model Course
+@{
+	ViewData["Title"] = "Course Notice";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>@Model.CourseName | @Model.CourseID</h5>
+<hr />
+<form method="post" enctype="multipart/form-data">
+	<input type="file" name="files" multiple required />
+	<input type="text" name="Course Id" placeholder="Course ID..." />
+	<input type="text" autocomplete="off" placeholder="Enter file description" name="description" required />
+	<button type="submit" class="btn btn-info" asp-controller="Notice" asp-action="UploadNoticeToDB">
+		Upload
+	</button>
+</form>
+<hr />
+@if (Model.Notices.Count <= 0)
+{
+	<caption>No records found.</caption>
+}
+else
+{
+	<caption>List of Files on File System</caption>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>File Type</th>
+				<th>File</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var notice in Model.Notices)
+			{
+				<tr>
+					<td>@notice.Id</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Notice" asp-action="Detail"
+					asp-route-Id="@notice.Id">@notice.Name</a>
+					</td>
+					<td>@notice.FileType</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Notice" asp-action="DownloadNoticeFromDB"
+					asp-route-Id="@notice.Id">
+							###
+						</a>
+					</td>
+					<td>@notice.CreatedOn</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+<hr />

@@ -1,0 +1,45 @@
+﻿@model Course
+@{
+	ViewData["Title"] = "Lecture Note";
+}
+
+
+@if (Model.Notices.Count <= 0)
+{
+	<caption>No records found.</caption>
+}
+else
+{
+	<caption>List of Files on File System</caption>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>File Type</th>
+				<th>File</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var note in Model.Notices)
+			{
+				<tr>
+					<td>@note.Id</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Note" asp-action="Detail" asp-route-Id="@note.Id">@note.Name</a>
+					</td>
+					<td>@note.FileType</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Note" asp-action="DownloadNoticeFromDB" asp-route-Id="@note.Id">
+							###
+						</a>
+					</td>
+					<td>@note.CreatedOn</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+<hr />
+

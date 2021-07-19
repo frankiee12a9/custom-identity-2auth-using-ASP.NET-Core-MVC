@@ -9,6 +9,6 @@ namespace identity_2auth_mvc.Models
 	{
 		public string UserId { get; set; }
 		public string UserName { get; set; }
-		public IEnumerable<string> Roles { get; set; }
+		public virtual IEnumerable<string> Roles { get; set; }
 	}
 }

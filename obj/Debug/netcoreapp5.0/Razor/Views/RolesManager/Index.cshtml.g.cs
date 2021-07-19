@@ -26,8 +26,29 @@ using identity_2auth_mvc.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using identity_2auth_mvc.Models.Klas;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using identity_2auth_mvc.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\PC_1\source\repos\file_handling_mvc\identity_2auth_mvc\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"934f01912647d7d58aa82864217c7e444b568997", @"/Views/RolesManager/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b4ddd4c73cf9e949ac669da8d4e0195dfbd61e49", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8c8956e3a956151fbd957c45296973096f3b8a69", @"/Views/_ViewImports.cshtml")]
     public class Views_RolesManager_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Microsoft.AspNetCore.Identity.IdentityRole>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("method", "post", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -68,7 +89,7 @@ using identity_2auth_mvc.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<h1>Role Manager</h1>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "934f01912647d7d58aa82864217c7e444b5689974533", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "934f01912647d7d58aa82864217c7e444b5689975165", async() => {
                 WriteLiteral("\r\n\t<div class=\"input-group\">\r\n\t\t<input name=\"roleName\" class=\"form-control w-25\" />\r\n\t\t<span class=\"input-group-btn\">\r\n\t\t\t<button class=\"btn btn-info\">Add New Role</button>\r\n\t\t</span>\r\n\t</div>\r\n");
             }
             );

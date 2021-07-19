@@ -1,0 +1,158 @@
+﻿@model List<Course>
+@using identity_2auth_mvc.Models.Klas 
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<form method="post" enctype="multipart/form-data">
+	<input type="file" name="files" multiple required />
+	<input type="text" name="CourseId" required placeholder="Course ID..." />
+	<input type="text" autocomplete="off" placeholder="Enter file description" name="description" required />
+	<button type="submit" class="btn btn-info" asp-controller="Notice" asp-action="UploadNoticeToDB">
+		Upload
+	</button>
+</form>
+<hr />
+*@
+@*<h4>Files on File System</h4>
+@if (Model.Notices.Count <= 0)
+{
+	<caption>No records found.</caption>
+}
+else
+{
+	<caption>List of Files on File System</caption>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>File Type</th>
+				<th>File</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var notice in Model.Notices)
+			{
+				<tr>
+					<td>@notice.Id</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Notice" asp-action="Detail" asp-route-Id="@notice.Id">@notice.Name</a>
+					</td>
+					<td>@notice.FileType</td>
+					<td>
+						<a class="nav-link mt-0" asp-controller="Notice" asp-action="DownloadNoticeFromDB" asp-route-Id="@notice.Id">
+							###
+						</a>
+					</td>
+					<td>@notice.CreatedOn</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+<hr />*@
+
+<table class="table table-striped text-center">
+	<thead>
+		<tr>
+			<th>Course ID</th>
+			<th>Course Name</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var course in Model)
+		{
+			<tr>
+				<td>@course.CourseID</td>
+				<td>@course.CourseName</td>
+				<td>
+					<a asp-controller="Notice" asp-action="CourseNotice" asp-route-id="@course.CourseID">Detail</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+
+@section Scripts
+{
+	<script>
+		$(document).ready(function () {
+			let url = '@Url.Action("NoticePartial", "Notice")';
+			$('#course_notice').on('click', function (e) {
+				e.preventDefault();
+				$.ajax({
+					type: "POST",
+					url: url
+				}).done(function (result) {
+					$('#notice_dashboard').html(result);
+				}).fail(function (e) {
+					console.log(1);
+					console.log(e.responseText);
+				});
+			});
+		});
+	</script>
+}
+
+@*@if (ViewBag.Message != null)
+	{
+		<div class="alert alert-success alert-dismissible" style="margin-top:20px">
+			@ViewBag.Message
+		</div>
+	}
+
+	<form method="post" enctype="multipart/form-data">
+		<input type="file" name="files" multiple required />
+		<input type="text" name="CourseId" required placeholder="Course ID..."/>
+		<input type="text" autocomplete="off" placeholder="Enter file description" name="description" required />
+		<button type="submit" class="btn btn-info" asp-controller="Notice" asp-action="UploadNoticeToDB">
+			Upload
+		</button>
+	</form>
+	<hr />
+	<h4>Files on File System</h4>
+	@if (Model.NoticesViewModel.Count <= 0)
+	{
+		<caption>No records found.</caption>
+	}
+	else
+	{
+		<caption>List of Files on File System</caption>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>File Type</th>
+					<th>File</th>
+					<th>Created On</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var notice in Model.NoticesViewModel)
+				{
+					<tr>
+						<td>@notice.Id</td>
+						<td>
+							<a class="nav-link mt-0" asp-controller="Notice" asp-action="Detail" asp-route-Id="@notice.Id">@notice.Name</a>
+						</td>
+						<td>@notice.FileType</td>
+						<td>
+							<a class="nav-link mt-0" asp-controller="Notice" asp-action="DownloadNoticeFromDB" asp-route-Id="@notice.Id">
+								###
+							</a>
+						</td>
+						<td>@notice.CreatedOn</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	<hr />*@

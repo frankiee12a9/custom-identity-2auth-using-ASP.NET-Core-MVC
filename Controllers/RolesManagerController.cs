@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using identity_2auth_mvc.Enums;
 
 namespace identity_2auth_mvc.Controllers
 {
+	[Authorize(Roles = "SuperAdmin")]
 	public class RolesManagerController: Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;

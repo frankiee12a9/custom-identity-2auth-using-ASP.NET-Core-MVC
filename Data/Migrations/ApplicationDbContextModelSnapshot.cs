@@ -215,10 +215,6 @@ namespace identity_2auth_mvc.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -276,18 +272,240 @@ namespace identity_2auth_mvc.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
                 });
 
-            modelBuilder.Entity("identity_2auth_mvc.Models.Lecturer", b =>
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.Course", b =>
                 {
-                    b.HasBaseType("identity_2auth_mvc.Models.AppUser");
+                    b.Property<int>("CourseID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Department")
+                    b.Property<int>("CourseCredit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Lecturer");
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CourseID");
+
+                    b.ToTable("Course");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseID = 1101,
+                            CourseCredit = 0,
+                            CourseName = "Data Structure"
+                        },
+                        new
+                        {
+                            CourseID = 1102,
+                            CourseCredit = 0,
+                            CourseName = "Algorithm"
+                        },
+                        new
+                        {
+                            CourseID = 1103,
+                            CourseCredit = 0,
+                            CourseName = "Discrete Math"
+                        },
+                        new
+                        {
+                            CourseID = 1104,
+                            CourseCredit = 0,
+                            CourseName = "Database"
+                        },
+                        new
+                        {
+                            CourseID = 1105,
+                            CourseCredit = 0,
+                            CourseName = "English Conversation"
+                        });
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.CourseAssignment", b =>
+                {
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LecturerID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CourseID", "LecturerID");
+
+                    b.HasIndex("LecturerID");
+
+                    b.ToTable("CourseAssignments");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseID = 1101,
+                            LecturerID = "1e4cd5d1-b39e-41b0-9770-98fa6ad5120f"
+                        },
+                        new
+                        {
+                            CourseID = 1102,
+                            LecturerID = "4874bfd3-8a49-4080-b066-867d62c240cd"
+                        },
+                        new
+                        {
+                            CourseID = 1103,
+                            LecturerID = "9bd6589b-d7f7-4ec3-9328-968149aed66d"
+                        },
+                        new
+                        {
+                            CourseID = 1104,
+                            LecturerID = "adcf9257-2707-4f4b-8de3-24626dea9748"
+                        },
+                        new
+                        {
+                            CourseID = 1105,
+                            LecturerID = "bfc28615-f88e-41ed-9350-a604fcbb163e"
+                        });
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.CourseSchedule", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClassPlace1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClassPlace2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClassTime1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClassTime2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CourseID")
+                        .IsUnique();
+
+                    b.ToTable("CourseSchedule");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ClassPlace1 = "새빛관",
+                            ClassPlace2 = "새빛관",
+                            ClassTime1 = "월요일 3교시",
+                            ClassTime2 = "화요일 4교시",
+                            CourseID = 1101
+                        },
+                        new
+                        {
+                            ID = 2,
+                            ClassPlace1 = "참빗관",
+                            ClassPlace2 = "새빗관",
+                            ClassTime1 = "월요일 2교시",
+                            ClassTime2 = "목요일 2교시",
+                            CourseID = 1102
+                        },
+                        new
+                        {
+                            ID = 3,
+                            ClassPlace1 = "화도관",
+                            ClassPlace2 = "화도관",
+                            ClassTime1 = "수요일 2교시",
+                            ClassTime2 = "수요일 3교시",
+                            CourseID = 1103
+                        },
+                        new
+                        {
+                            ID = 4,
+                            ClassPlace1 = "의옥관",
+                            ClassPlace2 = "의옥관",
+                            ClassTime1 = "금요일 1교시",
+                            ClassTime2 = "금요일 2교시",
+                            CourseID = 1104
+                        },
+                        new
+                        {
+                            ID = 5,
+                            ClassPlace1 = "비마관",
+                            ClassPlace2 = "비마관",
+                            ClassTime1 = "수요일 4교시",
+                            ClassTime2 = "화요일 5교시",
+                            CourseID = 1105
+                        });
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.Enrollment", b =>
+                {
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EnrollmentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseID", "StudentID");
+
+                    b.HasIndex("StudentID");
+
+                    b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.NoticeViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Notice");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -339,6 +557,84 @@ namespace identity_2auth_mvc.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.CourseAssignment", b =>
+                {
+                    b.HasOne("identity_2auth_mvc.Models.Klas.Course", "Course")
+                        .WithMany("CourseAssignments")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("identity_2auth_mvc.Models.AppUser", "Lecturer")
+                        .WithMany("CourseAssignments")
+                        .HasForeignKey("LecturerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Lecturer");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.CourseSchedule", b =>
+                {
+                    b.HasOne("identity_2auth_mvc.Models.Klas.Course", "Course")
+                        .WithOne("CourseSchedule")
+                        .HasForeignKey("identity_2auth_mvc.Models.Klas.CourseSchedule", "CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.Enrollment", b =>
+                {
+                    b.HasOne("identity_2auth_mvc.Models.Klas.Course", "Course")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("identity_2auth_mvc.Models.AppUser", "Student")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.NoticeViewModel", b =>
+                {
+                    b.HasOne("identity_2auth_mvc.Models.Klas.Course", "Course")
+                        .WithMany("Notices")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.AppUser", b =>
+                {
+                    b.Navigation("CourseAssignments");
+
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("identity_2auth_mvc.Models.Klas.Course", b =>
+                {
+                    b.Navigation("CourseAssignments");
+
+                    b.Navigation("CourseSchedule");
+
+                    b.Navigation("Enrollments");
+
+                    b.Navigation("Notices");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,174 @@
+﻿@model CourseViewModel
+@{
+	var title = "Create new Course";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+	@if (Model.Course.CourseID != 0)
+{
+	<input type="hidden" asp-for="Course.CourseID" />
+	title = "Update Course Details";
+}
+<h3 class="text-primary">@title</h3>
+<div class="container">
+	<form method="post" asp-controller="CourseManage" asp-action="Upsert">
+		<div class="row px-2 border p-4 text-center">
+				<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+				<div class="col-8">
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseName"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseName" class="form-control" />
+							<span asp-validation-for="Course.CourseName" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseType"></label>
+						</div>
+						<div class="col-8">
+							<select asp-for="Course.CourseType" asp-items="Model.CourseTypeList" class="form-control">
+							</select>
+						@*	@Html.DropDownListFor(m => m.Course.CourseID, Model.CourseTypeList,
+												   "Please select a course type", new { @class = "form-control" })*@
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseCredit"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseCredit" class="form-control" max="3" min="0" />
+							<span asp-validation-for="Course.CourseCredit" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseDescription"></label>
+						</div>
+						<div class="col-8">
+							<textarea asp-for="Course.CourseDescription" class="form-control"></textarea>
+							<span asp-validation-for="Course.CourseDescription" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseSchedule.ClassTime1"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseSchedule.ClassTime1" class="form-control" />
+							<span asp-validation-for="Course.CourseSchedule.ClassTime1" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseSchedule.ClassPlace1"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseSchedule.ClassPlace1" class="form-control" />
+							<span asp-validation-for="Course.CourseSchedule.ClassPlace1" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseSchedule.ClassTime2"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseSchedule.ClassTime2" class="form-control" />
+							<span asp-validation-for="Course.CourseSchedule.ClassTime2" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label asp-for="Course.CourseSchedule.ClassPlace2"></label>
+						</div>
+						<div class="col-8">
+							<input asp-for="Course.CourseSchedule.ClassPlace2" class="form-control" />
+							<span asp-validation-for="Course.CourseSchedule.ClassPlace2" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-4">
+							<label>Lecturer</label>
+						</div>
+						<div class="col-8">
+							<select class="custom-select"
+									asp-items="@(new SelectList(Model.ProfessorList, "Value","Text", new { @class = "form-control"}) )">
+							</select>
+						</div>
+					</div>
+				@*	@foreach (var courseAssignment in Model.Course.CourseAssignments)
+					{
+						<div class="form-group row">
+							<div class="col-4">
+								<label asp-for="@courseAssignment.LecturerID"></label>
+							</div>c
+							<div class="col-8">
+								<select class="custom-select"
+										asp-items="@(new SelectList(Model.ProfessorList, "Value","Text", new { @class = "form-control"}) )">
+								</select>
+							</div>
+						</div>
+					}*@
+					<div class="form-group row">
+						<div class="col-4">
+							<label>Teaching Assistant</label>
+						</div>
+						<div class="col-8">
+							<select class="custom-select"
+									asp-items="@(new SelectList(Model.TAList, "Value","Text", new { @class = "form-control"}) )">
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-8 offset-4">
+							@if (Model.Course.CourseID != 0)
+							{
+								<partial name="_EditAndBackToListButton" model="Model.Course.CourseID" />
+							}
+							else
+							{
+								<div class="row">
+									<div class="col">
+										<button type="submit" class="btn btn-primary form-control">Create</button>
+									</div>
+									<div class="col">
+										<a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+									</div>
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+		</div>
+	</form>
+</div>
+
+@section Scripts {
+	<script src="https://cdn.tiny.cloud/1/n94ifuzvl80pchikopiwgz2esrw8n28dwcywvpejlqrregfp/tinymce/5/tinymce.min.js"></script>
+
+	<script>
+
+		tinymce.init({
+			selector: "textarea",
+			plugins: "lists",
+			menubar: "file edit format"
+		});
+       @* function validateInput() {
+            if (document.getElementById("uploadField").value == "") {
+                swal("Error", "Please select an image", "Error");
+                return false;
+            }
+            return true;
+        }
+        $(document).ready(function() {
+            if (document.getElementById("priceText").value ==  "0") {
+                document.getElementById("priceText").value = "";
+            }
+        });*@
+	</script>
+} 

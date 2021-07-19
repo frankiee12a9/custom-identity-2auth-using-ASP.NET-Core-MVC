@@ -1,0 +1,157 @@
+﻿@model Course 
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<div class="container text-center">
+		<div class="card">
+			<div class="card-header bg-gradient ml-0 row container">
+				<div class="form-inline row container">
+					<div class="col-12 d-none d-md-block col-md-4 p-2 text-left">
+						<h3 class="text-primary">
+							&nbsp; Course Detail
+						</h3>
+					</div>
+					<div class="col-12 col-md-4 offset-md-4 text-right">
+						<a asp-action="Index" class="btn btn-outline-info">Back to Courses List</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<table class="table table-striped m-0">
+					<tbody>
+						<tr>
+							<th scope="row">Course Name</th>
+							<td colspan="5">@Model.CourseName</td>
+							<th scope="row">Course Credit</th>
+							<td>@Model.CourseCredit</td>
+						</tr>
+						<tr>
+							<th scope="row">Course ID</th>
+							<td colspan="5">@Model.CourseID</td>
+							<th scope="row">Course Type</th>
+							<td>@Model.CourseType</td>
+						</tr>
+						<tr>
+							<th scope="row">Course Schedule</th>
+							<td colspan="5">@Model.CourseSchedule</td>
+							<th scope="row">Course Enrollments</th>
+							<td>
+								<a class="btn btn-outline-info" asp-action="GetEnrollemnts">@Model.Enrollments.Count</a>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Lecturer</th>
+							@foreach (var courseAsisngment in Model.CourseAssignments)
+							{
+								<td colspan="5">@courseAsisngment.Lecturer.UserName</td>
+							}
+							<th scope="row">Lecturer Type</th>
+							<td>NULL</td>
+						</tr>
+						<tr>
+							<th scope="row">Course Description</th>
+							<td colspan="10">@Model.CourseDescription</td>
+						</tr>
+					</tbody>
+				</table>
+				<hr />
+				<div class="col-12 d-none d-md-block col-md-4 p-2 text-left mt-2">
+					<h5 class="text-primary">Course Schedule</h5>
+				</div>
+				<table class="table table-striped mt-4">
+					<thead>
+						<tr>
+							<th colspan="1">Week</th>
+							<th colspan="5">Lecture Content</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td colspan=""></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  2</th>
+							<td colspan=""></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  3</th>
+							<td colspan="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  4</th>
+							<td colspan=""></td>
+							<td></td>
+						<tr>
+							<th scope="row">  5</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						<tr>
+							<th scope="row">  6</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						<tr>
+							<th scope="row">  7</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						<tr>
+							<th scope="row">  8</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  9</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  10</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  11</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  12</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  13</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  15</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">  16</th>
+							<td colspan="0">@Model.CourseSchedule</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">
+				<div class="row">
+					@if (User.IsInRole("Lecturer") || User.IsInRole("SuperAdmin"))
+					{
+					<div class="col-12 col-md-4 text-left">
+						<a asp-action="Upsert" asp-route-id="@Model.CourseID" class="btn btn-info">Edit Lecture Content</a>
+					</div>
+					}
+				</div>
+			</div>
+		</div>
+</div>
